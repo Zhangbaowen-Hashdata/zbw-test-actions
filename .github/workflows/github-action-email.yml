@@ -12,7 +12,7 @@ jobs:
       id: git_log
       uses: Edisonboy/latest-git-log-action@main
       with:
-        tag: origin/master
+        tag: origin/main
     # 发送邮件    
     - name: Send email
       uses: dawidd6/action-send-mail@v3
