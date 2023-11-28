@@ -30,7 +30,7 @@ jobs:
           subject: 小熊宝贝,小张带来今天的天气预报 (${{env.REPORT_DATE}})
           html_body: file://result.html
           to: 2435857966@qq.com
-	  from: GitHub Actions
+          from: GitHub Actions
       - name: 'Send second Email'
 	uses: dawidd6/action-send-mail@master
         with:
