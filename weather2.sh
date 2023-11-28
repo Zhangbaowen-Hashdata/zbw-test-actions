@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -o result2.html wttr.in/hanbin
+curl -o result2.md wttr.in/hanbin
