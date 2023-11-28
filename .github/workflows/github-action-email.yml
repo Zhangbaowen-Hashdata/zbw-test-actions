@@ -24,7 +24,7 @@ jobs:
           server_address: smtp.qq.com
           server_port: 465
           username: 2435857966@qq.com
-          password: zdzntfemptbdebdc
+          password: ${{ secrets.MAIL_PASSWORD }}
           subject: Shanghai Weather Report (${{env.REPORT_DATE}})
           html_body: file://result.html
           to: 2435857966@qq.com
