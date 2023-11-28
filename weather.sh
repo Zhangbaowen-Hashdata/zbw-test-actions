@@ -12,3 +12,5 @@ curl \
   -H "User-Agent: $UA" \
   -o result.html \
   https://wttr.in/$CITY?format=4\&$UNIT
+
+echo "今天小张也是爱你的一天呦~~~~" >> ./result.html
