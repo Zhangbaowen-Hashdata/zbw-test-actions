@@ -14,3 +14,4 @@ curl \
   https://wttr.in/$CITY?format=4\&$UNIT
 
 echo "今天小张也是爱你的一天呦~~~~" >> ./result.html
+echo "小张贴心准备了详细的天气情况: https://wttr.in/hanbin " >> result.html
