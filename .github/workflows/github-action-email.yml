@@ -16,7 +16,7 @@ jobs:
       - name: 'Get Weather'
         run: bash ./weather.sh
       - name: 'Get Date'
-        run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d %T')" >> $GITHUB_ENV
+        run: echo "REPORT_DATE=$(TZ=':Asia/Ankang' date '+%Y-%m-%d %T')" >> $GITHUB_ENV
         # 发送邮件 
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
@@ -25,7 +25,7 @@ jobs:
           server_port: 465
           username: 2435857966@qq.com
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: Shanghai Weather Report (${{env.REPORT_DATE}})
+          subject: 小熊宝贝,小张带来今天的天气预报 (${{env.REPORT_DATE}})
           html_body: file://result.html
           to: 2435857966@qq.com
           from: GitHub Actions
