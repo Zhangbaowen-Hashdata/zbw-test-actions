@@ -1,27 +1,31 @@
-name: github-action-email
-on: [push]
+name: 'GitHub Actions Weather Bot'
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 21 * * *'
+
 jobs:
-  build:
+  bot:
     runs-on: ubuntu-latest
     steps:
-    # 检出代码
-    - name: CheckoutRepo
-      uses: actions/checkout@v2
-    # 获取master分支上最新一条提交的git log  
-    - name: GetLastLog
-      id: git_log
-      uses: Edisonboy/latest-git-log-action@main
-      with:
-        tag: origin/main
-    # 发送邮件    
-    - name: Send email
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.qq.com
-        server_port: 465
-        username: ${{secrets.MAIL_USERNAME}}
-        password: ${{secrets.MAIL_PASSWORD}}
-        subject: Github Actions job result
-        to: ${{secrets.MAIL_TOUSERNAME}}
-        from: ${{secrets.MAIL_USERNAME}}
-        body: ${{github.repository}} push log : ${{steps.git_log.outputs.log}}
+        # 检出代码
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1
+      - name: 'Get Weather'
+        run: bash ./weather.sh
+      - name: 'Get Date'
+        run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d %T')" >> $GITHUB_ENV
+        # 发送邮件 
+      - name: 'Send mail'
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.163.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: Shanghai Weather Report (${{env.REPORT_DATE}})
+          html_body: file://result.html
+          to: 2435857966@qq.comcom
+          from: GitHub Actions
