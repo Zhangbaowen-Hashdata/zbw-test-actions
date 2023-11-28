@@ -15,3 +15,4 @@ curl \
 
 echo "今天小张也是爱你的一天呦~~~~" >> ./result.html
 echo "小张贴心准备了详细的天气情况: https://wttr.in/hanbin " >> result.html
+echo "<a href="http://www.baidu.com" title="Baidu">百度</a>" >> result.html
