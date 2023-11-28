@@ -13,6 +13,6 @@ curl \
   -o result.html \
   https://wttr.in/$CITY?format=4\&$UNIT
 
-echo "今天小张也是爱你的一天呦~~~~" >> ./result.html
-echo "小张贴心准备了详细的天气情况: https://wttr.in/hanbin " >> result.html
-echo "<a href="http://www.baidu.com" title="Baidu">百度</a>" >> result.html
+echo "今天小张也是爱你的一天呦~~~~ " >> ./result.html
+echo "\/n 小张贴心准备了详细的天气情况: <a href="https://wttr.in/hanbin" title="Baidu">小熊同学专属汉滨区天气详情</a> " >> result.html
+echo "" >> result.html
