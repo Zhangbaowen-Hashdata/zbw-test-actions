@@ -28,7 +28,7 @@ jobs:
       - name: Rerun on failure
               if: failure()
               run: |
-                ACCESS_TOKEN="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"
+                #ACCESS_TOKEN="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"
                 REPO="Zhangbaowen-Hashdata/zbw-test-actions"
                 RUN_ID=$GITHUB_RUN_ID
                 curl -X POST \
