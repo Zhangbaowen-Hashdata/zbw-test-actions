@@ -1,0 +1,25 @@
+name: My Workflow with Retry
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run a command that may fail
+      uses: actions/checkout@v2
+      id: checkout
+
+    - name: Check out GitHub Packages
+      uses: docker/setup-buildx-action@v1
+      with:
+        packages-url: ${{ steps.checkout.outputs.repo-url }}
+        buildx-image: buildx
+
+    - name: Build and push Docker image
+      run: |
+        docker build --file Dockerfile --tag my-image:${{ github.sha }} .
+        docker push my-image:${{ github.sha }}
+      retry:
+        max_attempts: 3 # 最大重试次数
+        delay: 5s # 每次重试之间的延迟时间
