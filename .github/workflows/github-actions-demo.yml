@@ -16,4 +16,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - mkdir aaa
+      - mkdir aaa
+      - mkdir aaa
+      - echo "aaa创建了"
 
