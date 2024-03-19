@@ -2,7 +2,7 @@ name: GitHub Actions Demo
 on:
   push:
   workflow_run:
-    workflows: ["GitHub Actions Demo"]
+    workflows: ["Explore-GitHub-Actions"]  # 将工作流程名称更改为实际的工作流程名称
     types:
       - completed
 
