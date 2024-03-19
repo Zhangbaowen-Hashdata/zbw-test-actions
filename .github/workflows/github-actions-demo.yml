@@ -3,10 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   - workflow_dispatch
   - push
-  - workflow_run:
-        workflows: ["GitHub Actions Demo"]
-        types:
-          - failure
+
 
 jobs:
   Explore-GitHub-Actions:
