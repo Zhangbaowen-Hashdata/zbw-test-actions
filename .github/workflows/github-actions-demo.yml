@@ -18,6 +18,9 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: mkdir aaa
       - run: mkdir aaa
+        retry:
+              max_attempts: 3 # 重试的最大次数
+              delay: 5s # 每次重试之间的等待时间
       - run: mkdir aaa
       - run: echo "aaa创建了"
 
