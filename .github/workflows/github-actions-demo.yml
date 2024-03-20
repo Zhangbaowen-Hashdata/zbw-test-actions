@@ -8,9 +8,9 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: mkdir aaa
       - run: mkdir aaa
-      - name: Retry on failure
-        uses: nick-fields/retry@v2
-        with:
-          max_attempts: 3
-          retry_on: error
-          timeout_seconds: 5
+    - name: Retry on failure
+      uses: nick-fields/retry@v2
+      with:
+        max_attempts: 3
+        retry_on: error
+        timeout_seconds: 5
