@@ -15,5 +15,5 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           max_attempts: 3
-          retry_on: 1
+          continue_on_error: true
           timeout_seconds: 5
