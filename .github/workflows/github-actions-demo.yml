@@ -12,7 +12,7 @@ jobs:
       - name: mkdir a2
         run: mkdir aaa
       - name: Retry on failure
-        uses: nick-fields/retry@v2
+        uses: actions/retry@v2
         with:
           max_attempts: 3
           continue_on_error: true
