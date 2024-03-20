@@ -1,11 +1,6 @@
 name: GitHub Actions Demo
 on:
   push:
-  #workflow_run:
-    #workflows: ["Explore-GitHub-Actions"]  # 将工作流程名称更改为实际的工作流程名称
-    #types:
-     # - completed
-
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -13,12 +8,6 @@ jobs:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: mkdir aaa
       - run: mkdir aaa
-      #- name: Rerun workflow on error
-        #if: failure()
-        #run: |
-         # curl -X POST -u ${{ secrets.GITHUB_TOKEN }} \
-          #-H "Accept: application/vnd.github.v3+json" \
-          #https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun
       - name: Retry on failure
         uses: nick-fields/retry@v2
         with:
