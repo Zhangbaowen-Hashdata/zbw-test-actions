@@ -1,17 +1,17 @@
-name: GitHub Actions Demo
+name: Retry Failed Job
 on:
   push:
 jobs:
-  Explore-GitHub-Actions:
+  retry-job:
     runs-on: ubuntu-latest
     steps:
-      - name: echo xxx
-        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - name: mkdir a
-        run: mkdir aaa
-      - name: mkdir a2
-        run: mkdir aaa
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: npm test
       - name: Retry on failure
-        uses: actions/retry@v2
+        uses: nick-fields/retry@v3
         with:
+          timeout_minutes: 10
           max_attempts: 3
+          command: npm test
