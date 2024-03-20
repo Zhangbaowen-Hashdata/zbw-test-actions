@@ -18,3 +18,4 @@ jobs:
           max_attempts: 3
           retry_on: 1
           timeout_seconds: 5
+          command: echo "234"
