@@ -13,7 +13,7 @@ jobs:
         run: mkdir aaa
       - name: Retry on failure
         uses: nick-fields/retry@v2
-       with:
+        with:
           max_attempts: 3
           retry_on: error
           timeout_seconds: 5
