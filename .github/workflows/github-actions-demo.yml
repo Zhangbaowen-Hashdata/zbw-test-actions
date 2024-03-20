@@ -15,5 +15,3 @@ jobs:
         uses: actions/retry@v2
         with:
           max_attempts: 3
-          continue_on_error: true
-          timeout_seconds: 5
