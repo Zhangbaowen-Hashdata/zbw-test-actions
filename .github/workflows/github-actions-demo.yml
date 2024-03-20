@@ -9,7 +9,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Run tests
         run: yum install -y wget
-      - name: Retry on failure
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
