@@ -5,12 +5,15 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: mkdir aaa
-      - run: mkdir aaa
-    - name: Retry on failure
-      uses: nick-fields/retry@v2
-      with:
-        max_attempts: 3
-        retry_on: error
-        timeout_seconds: 5
+      - name: echo xxx
+        run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: mkdir a
+        run: mkdir aaa
+      - name: mkdir a2
+        run: mkdir aaa
+      - name: Retry on failure
+        uses: nick-fields/retry@v2
+       with:
+          max_attempts: 3
+          retry_on: error
+          timeout_seconds: 5
