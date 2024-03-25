@@ -1,20 +1,22 @@
-
-name: "Retry action using retry step"
+name: GitHub Actions Demo
 on:
   push:
-  workflow_call:
+  workflow_run:
+    workflows: ["GitHub Actions Demo"]
+    workflows: ["Explore-GitHub-Actions"]  # 将工作流程名称更改为实际的工作流程名称
+    types:
+      - completed
+
 jobs:
-  retry-job:
-    runs-on: "ubuntu-latest"
-    name: My Job
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Use the retry action
-        uses: nick-fields/retry@v2
-        with:
-          max_attempts: 3
-          retry_on: error
-          timeout_seconds: 5
-          command: |
-            echo 'some command that would potentially fail'
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: mkdir aaa
+      - run: mkdir aaa
+      - name: Rerun workflow on error
+        if: failure()
+        run: |
+          curl -X POST -u ${{ secrets.GITHUB_TOKEN }} \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun
