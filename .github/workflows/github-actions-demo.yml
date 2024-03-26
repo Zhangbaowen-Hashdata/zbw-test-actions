@@ -11,9 +11,9 @@ jobs:
       - run: mkdir aaa
       - run: mkdir aaa
       - name: Handle Failure
-              if: failure()
-              run: |
-                echo "The previous step failed. Handling failure..."
+        if: failure()
+        run: |
+           echo "The previous step failed. Handling failure..."
                 # Add your failure handling logic here
       - name: Rerun workflow on error
         if: failure()
