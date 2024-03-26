@@ -1,5 +1,6 @@
 name: GitHub Actions Demo
 on:
+  push:
   workflow_dispatch:
 jobs:
   use_api:
