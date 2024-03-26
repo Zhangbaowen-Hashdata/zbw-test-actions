@@ -1,25 +1,13 @@
 name: GitHub Actions Demo
 on:
-  push:
-
-
+  workflow_dispatch:
 jobs:
-  Explore-GitHub-Actions:
+  use_api:
     runs-on: ubuntu-latest
+    permissions:
+      issues: read
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: mkdir aaa
-      - run: mkdir aaa
-      - name: Handle Failure
-        if: failure()
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-           echo "The previous step failed. Handling failure..."
-                # Add your failure handling logic here
-      - name: Rerun workflow on error
-        if: failure()
-        run: |
-          curl -L \
-            -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer ${{ secrets.RETRY_JOB }}" \
-            https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
+          gh api https://api.github.com/repos/octocat/Spoon-Knife/issuescom/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
