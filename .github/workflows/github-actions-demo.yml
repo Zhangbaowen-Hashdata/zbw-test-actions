@@ -1,14 +1,38 @@
-name: GitHub Actions Demo
+name: Test Retry Failed Job
 on:
   push:
-  workflow_dispatch:
+    branches:
+      - test-api-2
+
 jobs:
-  use_api:
+  intentionally-fail:
     runs-on: ubuntu-latest
-    permissions:
-      issues: read
     steps:
-      - env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Intentionally Fail Job
+        run: exit 1
+        id: fail_job
+
+  rerun-failed-job:
+    needs: intentionally-fail
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repo and Job ID
         run: |
-          gh api https://api.github.com/repos/octocat/Spoon-Knife/issuescom/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
+          repo=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)
+          job_id=${{ steps.fail_job.id }}
+          echo "Repository: $repo"
+          echo "Failed Job ID: $job_id"
+        id: get_repo_job_id
+
+      - name: Rerun Failed Job
+        run: |
+          token=$GITHUB_TOKEN
+          repo=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)
+          job_id=${{ steps.get_repo_job_id.outputs.job_id }}
+          url="https://api.github.com/repos/$repo/actions/runs/$job_id/rerun"
+          response=$(curl -X POST -H "Authorization: token $token" $url)
+          if [ $response -eq 201 ]; then
+            echo "作业重新运行成功"
+          else
+            echo "作业重新运行失败"
+          fi
