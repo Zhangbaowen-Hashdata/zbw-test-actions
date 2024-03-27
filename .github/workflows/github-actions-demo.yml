@@ -21,7 +21,7 @@ jobs:
           curl -L \
             -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer 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" \
+            -H "Authorization: Bearer ${secrets.NEW_API_TOKEN}" \
             https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
 
             #secrets.RETRY_JOB
