@@ -18,13 +18,13 @@ jobs:
       - name: Rerun workflow on error
         if: failure()
         run: |
-
-          curl -L \
-            -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Token ${{ secrets.TEST_API }}" \
-            # https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
-            https://docs.github.com/rest
-            #secrets.RETRY_JOB
-            #Bearer
-            #application/vnd.github.v3+json
+           curl -L  -X POST -H "Accept: application/vnd.github.v3+json" https://docs.github.com/zh/rest\?apiVersion\=2022-11-28
+#          curl -L \
+#            -X POST \
+#            -H "Accept: application/vnd.github.v3+json" \
+#            -H "Authorization: Token ${{ secrets.TEST_API }}" \
+#            # https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/rerun-failed-jobs
+#            https://docs.github.com/rest
+#            #secrets.RETRY_JOB
+#            #Bearer
+#            #application/vnd.github.v3+json
