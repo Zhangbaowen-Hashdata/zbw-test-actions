@@ -1,7 +1,9 @@
 name: GitHub Actions Demo
 on:
   push:
-
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   Explore-GitHub-Actions:
