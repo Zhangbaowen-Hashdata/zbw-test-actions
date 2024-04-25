@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "Hello world!"
+
 set -eux
 
 CITY=hanbin
