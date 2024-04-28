@@ -8,7 +8,7 @@ permissions:
 jobs:
   Build-rpm:
     runs-on: [self-hosted, Centos7]
-    steps:
+    steps: |
       run: |
         - wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
         - tar -xvf script.tar.gz
