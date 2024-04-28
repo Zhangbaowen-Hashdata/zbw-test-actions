@@ -6,8 +6,8 @@ permissions:
   contents: write
 
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: Centos7
+  Build-rpm:
+    runs-on: [self-hosted, Centos7]
     steps:
       run: |
         - wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
