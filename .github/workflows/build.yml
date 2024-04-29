@@ -33,9 +33,9 @@ jobs:
           fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
           pwd
           ls -al
-          echo "开始上传rpm包"
-          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
-          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
-          s3://public-artifacts/cbdb-rpm/cloudberrydb-1.5.2-`date +%Y_%m_%d-%H_%M_%S`.el7.x86_64.rpm \
-          --endpoint-url 'https://obs.cn-north-4.myhuaweicloud.com' \
-          --no-progress --no-verify-ssl
+#          echo "开始上传rpm包"
+#          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
+#          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
+#          s3://public-artifacts/cbdb-rpm/cloudberrydb-1.5.2-`date +%Y_%m_%d-%H_%M_%S`.el7.x86_64.rpm \
+#          --endpoint-url 'https://obs.cn-north-4.myhuaweicloud.com' \
+#          --no-progress --no-verify-ssl
