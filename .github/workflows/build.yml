@@ -8,7 +8,8 @@ on:
 jobs:
   Build-rpm:
     runs-on: self-hosted, Centos7
-    steps: |
+    steps:
+      - uses: actions/checkout@v3
       - name: run scripts
         run: |
           wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
