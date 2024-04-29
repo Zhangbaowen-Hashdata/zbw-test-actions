@@ -27,3 +27,9 @@ jobs:
           pwd
           ruby -v
           fpm --version
+          echo "制作rpm包"
+          mkdir -p tmp/usr/local/cloudberrydb
+          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
+          pwd
+          ls -al
