@@ -31,13 +31,13 @@ jobs:
           fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
           pwd
           ls -al
-          mkdir cbdb-packages
-          cp cloudberrydb-1.5.2-1.x86_64.rpm cbdb-packages
+          mkdir /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
+          cp cloudberrydb-1.5.2-1.x86_64.rpm /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
         with:
           name: Binary RPM
-          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cbdb-packages/
+          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 #          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
