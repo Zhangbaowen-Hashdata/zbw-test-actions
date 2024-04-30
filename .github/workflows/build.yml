@@ -1,9 +1,7 @@
 name: Build CBDB RPMS
 on:
   push:
-#permissions:
-#  id-token: write
-#  contents: write
+     branches: [zbw-test-runner]
 
 jobs:
   Build-rpm:
@@ -33,6 +31,11 @@ jobs:
           fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
           pwd
           ls -al
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: Binary RPM
+          path: ${{ /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm }}
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 #          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
