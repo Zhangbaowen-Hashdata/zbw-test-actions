@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: Binary RPM
-          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/
+          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 #          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
