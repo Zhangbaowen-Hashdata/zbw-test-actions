@@ -34,9 +34,9 @@ jobs:
 #          mkdir cbdb-packages
 #          cp cloudberrydb-1.5.2-1.x86_64.rpm cbdb-packages
       - name: Upload artifact
-        uses: actions/upload-artifact@v1.0.0
+        uses: actions/upload-artifact@v4
         with:
-          name: Binary RPM
+          name:   上传的东西
           path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
