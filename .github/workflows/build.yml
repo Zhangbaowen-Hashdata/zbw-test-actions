@@ -48,7 +48,7 @@ jobs:
   release:
     name: Upload Release Asset
     needs: "Build-rpm"
-    runs-on: [self-hosted, Centos7]
+    runs-on: self-hosted
     steps:
       - name: Create Release
         id: create_release
