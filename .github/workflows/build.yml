@@ -56,8 +56,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v6.6.9
-          release_name: Release v6.6.9
+          tag_name: v6.6.10
+          release_name: Release v6.6.10
           draft: false
           prerelease: false
       - uses: actions/download-artifact@v3
@@ -70,7 +70,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          asset_paths: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/000/*.gz
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_paths: /opt/*.gz
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 #          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
