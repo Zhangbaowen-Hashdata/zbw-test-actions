@@ -1,7 +1,7 @@
 name: Build CBDB RPMS
 on:
   schedule:
-    - cron: '25 10 * * *'
+    - cron: '* 16 * * *'
   push:
      branches: [zbw-test-runner]
 
