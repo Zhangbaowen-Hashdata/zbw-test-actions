@@ -10,74 +10,78 @@ jobs:
       - uses: actions/checkout@v3
       - name: run scripts
         run: |
-          mkdir 000
-          cd 000
+
           wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
           pwd
           ls -al
-#          tar -xvf script.tar.gz
-#          git config --global user.name "zhangbaowen"
-#          git config --global user.email "zhangbaowen@hashdata.cn"
-#          pwd
-#          ls -l
-#          source script/build_cbdb_env.sh
-#          git clone git@github.com:cloudberrydb/cloudberrydb.git
-#          cd cloudberrydb
-#          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
-#          make -j16
-#          make install
-#          pwd
-#          ruby -v
-#          fpm --version
-#          echo "制作rpm包"
-#          mkdir -p tmp/usr/local/cloudberrydb
-#          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
-#          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
-#          pwd
-#          ls -al
-#          mkdir /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
-#          cp cloudberrydb-1.5.2-1.x86_64.rpm /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
+          tar -xvf script.tar.gz
+          git config --global user.name "zhangbaowen"
+          git config --global user.email "zhangbaowen@hashdata.cn"
+          pwd
+          ls -l
+          source script/build_cbdb_env.sh
+          git clone git@github.com:cloudberrydb/cloudberrydb.git
+          cd cloudberrydb
+          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+          make -j16
+          make install
+          pwd
+          ruby -v
+          fpm --version
+          echo "制作rpm包"
+          mkdir -p tmp/usr/local/cloudberrydb
+          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
+          pwd
+          ls -al
+          mkdir /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
+          cp cloudberrydb-1.5.2-1.x86_64.rpm /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
       - name: Upload artifact
         uses: actions/upload-artifact@v1.0.0
         with:
           name: Binary RPM
-#          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
-          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/000/
+          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
 
-      - name: Get Release
-        id: get_release
-        uses: bruceadams/get-release@v1.3.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Get Release
+#        id: get_release
+#        uses: bruceadams/get-release@v1.3.2
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+
+#  release:
+#    name: Upload Release Asset
+#    needs: "Build-rpm"
+#    runs-on: self-hosted
+#    steps:
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: v6.6.10
+#          release_name: Release v6.6.10
+#          draft: false
+#          prerelease: false
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: Binary RPM
+#          path: /opt/
+#      - name: Upload Release Asset
+#        id: upload-release-asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ github.event.release.upload_url }}
+#          asset_path: /opt/*.gz
 
 
-  release:
-    name: Upload Release Asset
-    needs: "Build-rpm"
-    runs-on: self-hosted
-    steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v6.6.10
-          release_name: Release v6.6.10
-          draft: false
-          prerelease: false
-      - uses: actions/download-artifact@v3
-        with:
-          name: Binary RPM
-          path: /opt/
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: /opt/*.gz
+
+
+
 #          echo "开始上传rpm包"
 #          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
 #          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
