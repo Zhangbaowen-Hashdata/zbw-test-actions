@@ -42,7 +42,7 @@ jobs:
         with:
           name: Binary RPM
 #          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
-          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/000/script*.gz
+          path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/000/
 
 
   release:
