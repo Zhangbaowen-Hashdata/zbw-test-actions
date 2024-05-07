@@ -49,7 +49,7 @@ jobs:
           automatic_release_tag: v1.5.2-${{ github.run_number }}
           title: v1.5.2-${{ github.run_number }}
           prerelease: false
-          files: |
+          field: |
             /tmp/release/*
 
 
