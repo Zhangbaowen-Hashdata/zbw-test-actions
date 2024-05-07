@@ -38,6 +38,11 @@ jobs:
           release_name: Release v1.5.2-${{ github.run_number }}
           body: New release of cbdb RPM package
 
+      - name: print url
+        run: |
+          echo ${{ steps.create_release.outputs.upload_url }}"
+
+
       - name: Upload RPM to Release
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
