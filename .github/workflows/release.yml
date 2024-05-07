@@ -51,7 +51,7 @@ jobs:
 
       - name: Create Release Asset
         id: create_asset
-        uses: ndelangen/create-release-asset@v1
+        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
