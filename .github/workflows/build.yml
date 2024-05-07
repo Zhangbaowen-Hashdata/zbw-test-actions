@@ -1,9 +1,7 @@
 name: Build CBDB RPMS
 on:
   schedule:
-    - cron: '* 16 * * *'
-  push:
-     branches: [zbw-test-runner]
+    - cron: '0 3 * * *'
 
 jobs:
   Build-rpm:
@@ -43,50 +41,3 @@ jobs:
         with:
           name: Binary RPM
           path: /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
-
-#
-#      - name: Get Release
-#        id: get_release
-#        uses: bruceadams/get-release@v1.3.2
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-
-#  release:
-#    name: Upload Release Asset
-#    needs: "Build-rpm"
-#    runs-on: self-hosted
-#    steps:
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: v6.6.10
-#          release_name: Release v6.6.10
-#          draft: false
-#          prerelease: false
-#      - uses: actions/download-artifact@v3
-#        with:
-#          name: Binary RPM
-#          path: /opt/
-#      - name: Upload Release Asset
-#        id: upload-release-asset
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          upload_url: ${{ github.event.release.upload_url }}
-#          asset_path: /opt/*.gz
-
-
-
-
-
-#          echo "开始上传rpm包"
-#          export PYTHONWARNINGS="ignore:Unverified HTTPS request"
-#          aws s3 cp "/home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cloudberrydb-1.5.2-1.x86_64.rpm" \
-#          s3://public-artifacts/cbdb-rpm/cloudberrydb-1.5.2-`date +%Y_%m_%d-%H_%M_%S`.el7.x86_64.rpm \
-#          --endpoint-url 'https://obs.cn-north-4.myhuaweicloud.com' \
-#          --no-progress --no-verify-ssl
