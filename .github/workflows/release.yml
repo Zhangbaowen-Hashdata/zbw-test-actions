@@ -50,7 +50,7 @@ jobs:
           title: v1.5.2-${{ github.run_number }}
           prerelease: false
           files: |
-            artifacts/packages/*
+            /tmp/release/*
 
 
 #      - name: Upload RPM to Release
