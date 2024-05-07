@@ -1,13 +1,15 @@
 name: Build CBDB RPMS
 on:
   schedule:
-    - cron: '* 16 * * *'
+    - cron: '22 7 * * *'
   push:
      branches: [zbw-test-runner]
 
 jobs:
   Build-rpm:
     runs-on: self-hosted
+    with:
+      ref: zbw-test-runner
     steps:
       - uses: actions/checkout@v3
       - name: run scripts
