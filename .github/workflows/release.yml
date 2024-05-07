@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: /tmp/release/cbdb-1.5.2.rpm
           asset_name: cbdb-1.5.2.rpm
           asset_content_type: application/zip
