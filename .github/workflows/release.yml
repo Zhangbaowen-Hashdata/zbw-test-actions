@@ -1,0 +1,44 @@
+name: Build and Release RPM
+
+on:
+  push:
+    branches:
+      - release-cbdb-nightly
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build RPM package
+        run: |
+          # 在/tmp/release目录下构建cbdb-1.5.2.rpm包
+          # 这里假设您已经有构建RPM包的脚本或命令
+          # 示例命令：rpmbuild -bb your_spec_file.spec
+          mkdir -p /tmp/release
+          # 假设构建后的RPM包为cbdb-1.5.2.rpm
+          touch /tmp/release/cbdb-1.5.2.rpm
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.5.2-${{ github.run_number }}
+          release_name: Release v1.5.2-${{ github.run_number }}
+          body: New release of cbdb RPM package
+
+      - name: Upload RPM to Release
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /tmp/release/cbdb-1.5.2.rpm
+          asset_name: cbdb-1.5.2.rpm
+          asset_content_type: application/x-rpm
