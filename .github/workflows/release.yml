@@ -50,7 +50,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /tmp/release/cbdb-1.5.2.rpm
           asset_name: cbdb-1.5.2.rpm
-          asset_content_type: application/rpm
+          asset_content_type: application/zip
 
 #https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ github.run_id }}
 
