@@ -22,12 +22,12 @@ jobs:
           # 假设构建后的RPM包为cbdb-1.5.2.rpm
           touch /tmp/release/cbdb-1.5.2.rpm
 
-#      - name: Upload artifact
-#        id: upload_artifact
-#        uses: actions/upload-artifact@v1.0.0
-#        with:
-#          name: cbdb-1.5.2.rpm
-#          path: /tmp/release/
+      - name: Upload artifact
+        id: upload_artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: cbdb-1.5.2.rpm
+          path: /tmp/release/
 
       - name: Create Release
         id: create_release
@@ -50,7 +50,7 @@ jobs:
           title: v1.5.2-${{ github.run_number }}
           prerelease: false
           field: |
-            /tmp/release/*
+            /tmp/release/cbdb-1.5.2.rpm
 
 
 
