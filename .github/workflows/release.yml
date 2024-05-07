@@ -21,7 +21,12 @@ jobs:
           mkdir -p /tmp/release
           # 假设构建后的RPM包为cbdb-1.5.2.rpm
           touch /tmp/release/cbdb-1.5.2.rpm
-          curl -X POST -H "Authorization: token ${{ secrets.RELEASE_TOKEN }}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/${{ github.repository_owner }}/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=cbdb-1.5.2.rpm
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: Binary RPM
+          path: /tmp/release/
 
       - name: Create Release
         id: create_release
@@ -33,13 +38,13 @@ jobs:
           release_name: Release v1.5.2-${{ github.run_number }}
           body: New release of cbdb RPM package
 
-      - name: Upload RPM to Release
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /tmp/release/cbdb-1.5.2.rpm
-          asset_name: cbdb-1.5.2.rpm
-          asset_content_type: application/x-rpm
+#      - name: Upload RPM to Release
+#        id: upload-release-asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: /tmp/release/cbdb-1.5.2.rpm
+#          asset_name: cbdb-1.5.2.rpm
+#          asset_content_type: application/x-rpm
