@@ -41,4 +41,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: /tmp/release/cbdb-1.5.2.rpm
           asset_name: cbdb-1.5.2.rpm
-#          asset_content_type: application/x-rpm
+          asset_content_type: application/x-rpm
