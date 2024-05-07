@@ -2,12 +2,12 @@ name: Build CBDB RPMS
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 6 * * *'
+    - cron: '17 7 * * *'
 
 
 jobs:
   Build-rpm:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: run scripts
