@@ -29,18 +29,18 @@ jobs:
 #          name: cbdb-1.5.2.rpm
 #          path: /tmp/release/
 
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-#        with:
-#          tag_name: v1.5.2-${{ github.run_number }}
-#          release_name: Release v1.5.2-${{ github.run_number }}
-#          body: New release of cbdb RPM package
-#          draft: false
-#          prerelease: false
-#          file: /tmp/release/*
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          tag_name: v1.5.2-${{ github.run_number }}
+          release_name: Release v1.5.2-${{ github.run_number }}
+          body: New release of cbdb RPM package
+          draft: false
+          prerelease: false
+
 
       - name: Create GitHub release
         uses: marvinpinto/action-automatic-releases@latest
