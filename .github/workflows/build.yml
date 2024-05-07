@@ -1,7 +1,8 @@
 name: Build CBDB RPMS
 on:
   schedule:
-    - cron: '12 11 * * *'
+    - cron: "12 11 * * *"
+
 
 jobs:
   Build-rpm:
