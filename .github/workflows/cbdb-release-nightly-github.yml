@@ -43,6 +43,7 @@ jobs:
           cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
 
 
+
 #      - name: Upload artifact
 #        id: upload_artifact
 #        uses: actions/upload-artifact@v1.0.0
