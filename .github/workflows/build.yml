@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - schedule-cbdb-nightly
-  schedule:
-    - cron: '20 8 * * *'
+      schedule:
+      - cron: '20 8 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
@@ -17,8 +17,9 @@ jobs:
       - name: run scripts
         run: |
           # mkdir /tmp/release
-
-
+          git config --global user.name "zhangbaowen"
+          git config --global user.email "zhangbaowen@hashdata.cn"
+          source script/build_cbdb_env.sh
           git clone git@github.com:cloudberrydb/cloudberrydb.git
           cd cloudberrydb
           ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
