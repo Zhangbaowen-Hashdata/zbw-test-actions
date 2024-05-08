@@ -1,5 +1,8 @@
 name: Build and Release RPM
 
+variable:
+  timestamp=$(date +"%Y%m%d%H%M%S")
+
 on:
   push:
     branches:
@@ -37,11 +40,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: v1.5.2-${{ github.run_number }}
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
           release_name: Release v1.5.2-${{ github.run_number }}
           body: New release of cbdb RPM package
           draft: false
-          prerelease: false
+          prerelease: true
 
       - name: print tags
         run: |
