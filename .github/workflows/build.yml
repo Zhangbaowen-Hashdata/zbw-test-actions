@@ -1,16 +1,72 @@
-name: Build CBDB RPMS
+name: Build and Release RPM
+
+
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '17 7 * * *'
-
-
+  push:
+    branches:
+      - release-cbdb-nightly
+    schedule:
+      - cron: '10 8 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: scheduler-release-nightly
       - name: run scripts
         run: |
-          wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
-          echo "successfully"
+          mkdir /tmp/release
+          yum install -y go
+          export GOPROXY=https://goproxy.cn
+          source script/build_cbdb_env.sh
+
+          git clone git@github.com:cloudberrydb/cloudberrydb.git
+          cd cloudberrydb
+          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+          make -j16
+          make install
+          pwd
+          ruby -v
+          fpm --version
+          echo "制作rpm包"
+          mkdir -p tmp/usr/local/cloudberrydb
+          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
+          pwd
+          ls -al
+          cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
+
+
+
+#      - name: Upload artifact
+#        id: upload_artifact
+#        uses: actions/upload-artifact@v1.0.0
+#        with:
+#          name: cloudberrydb-1.0.2-1.x86_64.rpm
+#          path: /tmp/release/
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
+          release_name: Release v1.5.2.${{ github.run_number }}-nightly
+          body: New release of cbdb RPM package
+          draft: false
+          prerelease: true
+
+      - name: print tags
+        run: |
+          git tag
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "/tmp/release/cloudberrydb-1.5.2-1.x86_64.rpm"
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
