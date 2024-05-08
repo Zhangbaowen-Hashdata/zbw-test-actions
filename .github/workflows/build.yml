@@ -17,9 +17,7 @@ jobs:
       - name: run scripts
         run: |
           # mkdir /tmp/release
-          yum install -y go
-          export GOPROXY=https://goproxy.cn
-          source script/build_cbdb_env.sh
+
 
           git clone git@github.com:cloudberrydb/cloudberrydb.git
           cd cloudberrydb
