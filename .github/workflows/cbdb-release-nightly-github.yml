@@ -1,0 +1,86 @@
+name: Build and Release RPM
+
+
+on:
+  push:
+    branches:
+      - release-cbdb-nightly
+    schedule:
+      - cron: '17 7 * * *'
+jobs:
+  build_and_release:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build RPM package
+        run: |
+          # 在/tmp/release目录下构建cbdb-1.5.2.rpm包
+          # 这里假设您已经有构建RPM包的脚本或命令
+          # 示例命令：rpmbuild -bb your_spec_file.spec
+          mkdir -p /tmp/release
+#          # 假设构建后的RPM包为cbdb-1.5.2.rpm
+#
+#          wget https://public-artifacts.obs.myhuaweicloud.com/cloudberrydb-1.0.2-1.x86_64.rpm
+#          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release
+
+          wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
+          pwd
+          ls -al
+          tar -xvf script.tar.gz
+          git config --global user.name "zhangbaowen"
+          git config --global user.email "zhangbaowen@hashdata.cn"
+          pwd
+          ls -l
+          source script/build_cbdb_env.sh
+          git clone git@github.com:cloudberrydb/cloudberrydb.git
+          cd cloudberrydb
+          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+          make -j16
+          make install
+          pwd
+          ruby -v
+          fpm --version
+          echo "制作rpm包"
+          mkdir -p tmp/usr/local/cloudberrydb
+          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
+          pwd
+          ls -al
+          mkdir /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
+          cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
+
+
+#      - name: Upload artifact
+#        id: upload_artifact
+#        uses: actions/upload-artifact@v1.0.0
+#        with:
+#          name: cloudberrydb-1.0.2-1.x86_64.rpm
+#          path: /tmp/release/
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
+          release_name: Release v1.5.2.${{ github.run_number }}-nightly
+          body: New release of cbdb RPM package
+          draft: false
+          prerelease: true
+
+      - name: print tags
+        run: |
+          git tag
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "/tmp/release/cloudberrydb-1.5.2-1.x86_64.rpm"
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
