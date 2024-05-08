@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - schedule-release-nightly
-    schedule:
-      - cron: '20 8 * * *'
+  schedule:
+    - cron: '20 8 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
