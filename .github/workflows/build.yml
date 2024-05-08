@@ -4,9 +4,9 @@ name: Build and Release RPM
 on:
   push:
     branches:
-      - release-cbdb-nightly
+      - scheduler-release-nightly
     schedule:
-      - cron: '10 8 * * *'
+      - cron: '20 8 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
