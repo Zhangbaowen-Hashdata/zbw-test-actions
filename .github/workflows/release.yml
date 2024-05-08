@@ -20,13 +20,15 @@ jobs:
           # 示例命令：rpmbuild -bb your_spec_file.spec
           mkdir -p /tmp/release
           # 假设构建后的RPM包为cbdb-1.5.2.rpm
-          touch /tmp/release/cbdb-1.5.2.rpm
+
+          wget https://public-artifacts.obs.myhuaweicloud.com/cloudberrydb-1.0.2-1.x86_64.rpm
+          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release
 
       - name: Upload artifact
         id: upload_artifact
         uses: actions/upload-artifact@v1.0.0
         with:
-          name: cbdb-1.5.2.rpm
+          name: cloudberrydb-1.0.2-1.x86_64.rpm
           path: /tmp/release/
 
       - name: Create Release
@@ -42,11 +44,11 @@ jobs:
           prerelease: false
       - name: print tags
         run: |
-          echo ${tag-name}
+          git tag
       - name: release
         uses: softprops/action-gh-release@v1
         with:
-          files: "/tmp/release/cbdb-1.5.2.rpm"
+          files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
           tag_name: v1.5.2-${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
