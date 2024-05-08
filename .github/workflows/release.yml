@@ -39,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           tag_name: v1.5.2.${{ github.run_number }}-nightly
-          release_name: Release v1.5.2-${{ github.run_number }}
+          release_name: Release v1.5.2.${{ github.run_number }}-nightly
           body: New release of cbdb RPM package
           draft: false
           prerelease: true
@@ -51,7 +51,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
-          tag_name: v1.5.2-${{ github.run_number }}
+          tag_name: v1.5.2.${{ github.run_number }}-nightly
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
