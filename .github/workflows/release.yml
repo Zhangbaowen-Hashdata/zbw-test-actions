@@ -42,7 +42,7 @@ jobs:
           prerelease: false
       - name: print tags
         run: |
-          echo $tag-name
+          echo ${tag-name}
       - name: release
         uses: softprops/action-gh-release@v1
         with:
