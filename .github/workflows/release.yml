@@ -24,12 +24,12 @@ jobs:
           wget https://public-artifacts.obs.myhuaweicloud.com/cloudberrydb-1.0.2-1.x86_64.rpm
           cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release
 
-      - name: Upload artifact
-        id: upload_artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: cloudberrydb-1.0.2-1.x86_64.rpm
-          path: /tmp/release/
+#      - name: Upload artifact
+#        id: upload_artifact
+#        uses: actions/upload-artifact@v1.0.0
+#        with:
+#          name: cloudberrydb-1.0.2-1.x86_64.rpm
+#          path: /tmp/release/
 
       - name: Create Release
         id: create_release
@@ -42,6 +42,7 @@ jobs:
           body: New release of cbdb RPM package
           draft: false
           prerelease: false
+
       - name: print tags
         run: |
           git tag
@@ -53,29 +54,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-#      - name: Create GitHub release
-#        uses: marvinpinto/action-automatic-releases@latest
-#        with:
-#          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-#          automatic_release_tag: v1.5.2-${{ github.run_number }}
-#          title: v1.5.2-${{ github.run_number }}
-#          prerelease: false
-#          field: |
-#            /tmp/release/cbdb-1.5.2.rpm
-
-
-
-#      - name: Upload RPM to Release
-#        id: upload-release-asset
-#        uses: actions/upload-release-asset@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-#        with:
-#          upload_url: ${{ steps.upload_artifact.outputs.upload_url }}
-#          asset_path: /tmp/release/cbdb-1.5.2.rpm
-#          asset_name: cbdb-1.5.2.rpm
-#          asset_content_type: application/zip
-
-#https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ github.run_id }}
 
