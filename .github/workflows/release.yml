@@ -1,7 +1,5 @@
 name: Build and Release RPM
 
-variable:
-  timestamp=$(date +"%Y%m%d%H%M%S")
 
 on:
   push:
