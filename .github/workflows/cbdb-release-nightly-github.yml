@@ -8,22 +8,14 @@ on:
     schedule:
       - cron: '17 7 * * *'
 jobs:
-  build_and_release:
+  Build-rpm:
     runs-on: self-hosted
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Build RPM package
+      - uses: actions/checkout@v3
+        with:
+          ref: release-cbdb-nightly
+      - name: run scripts
         run: |
-          # 在/tmp/release目录下构建cbdb-1.5.2.rpm包
-          # 这里假设您已经有构建RPM包的脚本或命令
-          # 示例命令：rpmbuild -bb your_spec_file.spec
-          mkdir -p /tmp/release
-#          # 假设构建后的RPM包为cbdb-1.5.2.rpm
-#
-#          wget https://public-artifacts.obs.myhuaweicloud.com/cloudberrydb-1.0.2-1.x86_64.rpm
-#          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release
 
           wget https://public-artifacts.obs.myhuaweicloud.com/2024-04-28script/script.tar.gz
           pwd
@@ -48,7 +40,6 @@ jobs:
           fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
           pwd
           ls -al
-          mkdir /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions/cloudberrydb/cbdb-packages
           cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
 
 
