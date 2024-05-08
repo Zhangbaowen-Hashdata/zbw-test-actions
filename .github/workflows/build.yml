@@ -3,8 +3,7 @@ name: Build and Release RPM
 
 on:
   push:
-    branches:
-      - schedule-cbdb-nightly
+    branches: [schedule-cbdb-nightly]
       schedule:
       - cron: '20 8 * * *'
 jobs:
