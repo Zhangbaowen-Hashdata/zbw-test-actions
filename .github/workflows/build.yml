@@ -4,7 +4,7 @@ name: Build and Release RPM
 on:
   push:
     branches:
-      - scheduler-release-nightly
+      - schedule-release-nightly
     schedule:
       - cron: '20 8 * * *'
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: scheduler-release-nightly
+          ref: schedule-release-nightly
       - name: run scripts
         run: |
           mkdir /tmp/release
