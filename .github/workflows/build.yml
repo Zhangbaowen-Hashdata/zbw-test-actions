@@ -1,11 +1,11 @@
 name: Build and Release RPM
 
-
 on:
   push:
-    branches: [schedule-cbdb-nightly]
-      schedule:
-      - cron: '20 8 * * *'
+    branches:
+      - schedule-cbdb-nightly
+    schedule:
+      - cron: '* 17 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
