@@ -23,6 +23,7 @@ echo "克隆成功"
 cd /tmp/zbw-test-actions
 pwd
 ls -al
+
 latest_tag=$(git describe --tags --abbrev=0)
 
 echo "已存在tag最新一条为 $latest_tag"
