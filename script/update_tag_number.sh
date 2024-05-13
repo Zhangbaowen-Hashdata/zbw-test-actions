@@ -17,13 +17,20 @@ fi
 
 # 克隆仓库到目标目录
 cd /tmp/
+
 git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git
+echo "克隆成功"
 cd /tmp/zbw-test-actions
+
 latest_tag=$(git describe --tags --abbrev=0)
+echo "已存在tag最新一条为 $latest_tag"
 # 从最新的 tag 中提取版本号部分作为变量 version
+
 main_version=$(echo $latest_tag | grep -Eo 'v[0-9]+\.[0-9]+\.[0-9]+')
+echo "最新的cbdb主版本是$main_version"
 # 从 tag 中提取最后一个数字作为 nightly 版本号的基数
-echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1
+
+last_number=$(echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1)
 
 # 计算下一个 nightly 版本号的最后一位数字
 next_number=$((last_number + 1))
