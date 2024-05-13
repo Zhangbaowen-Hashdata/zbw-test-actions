@@ -11,7 +11,7 @@ on:
 
 #env:
 #  NEW_TAG=$new_tag
-#  VERSION=$version
+#  VERSION=$main_version
     # VERSION 和 NEW_TAG变量调用于script/update_tag_number.sh
     # version 指的是主版本号 eg: v1.5.2
     # new_tag 指的是新生成的整个tag eg:  v1.5.2.62-nightly
@@ -32,6 +32,7 @@ jobs:
           ls -al
           source script/update_tag_number.sh
           source script/build_cbdb_env.sh
+          echo "CBDB主版本号是 $main_version"
           echo "新tag是 $new_tag"
           git clone git@github.com:cloudberrydb/cloudberrydb.git
           cd cloudberrydb
@@ -75,7 +76,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.5.2-1.x86_64.rpm"
-          tag_name: v1.5.2.${{ github.run_number }}-nightly
+          tag_name: $new_tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
