@@ -3,7 +3,7 @@
 # 获取最新的 tag
 echo "工作空间是 $GITHUB_WORKSPACE"
 cd /tmp/
-git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git
+git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git --force
 cd zbw-test-actions
 
 
