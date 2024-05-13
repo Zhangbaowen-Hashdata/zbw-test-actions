@@ -5,7 +5,7 @@ on:
     branches:
       - schedule-cbdb-nightly
     schedule:
-      - cron: '* 3 * * *'
+      - cron: '* 5 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
@@ -56,9 +56,7 @@ jobs:
           draft: false
           prerelease: true
 
-      - name: print tags
-        run: |
-          git tag
+
       - name: release
         uses: softprops/action-gh-release@v1
         with:
