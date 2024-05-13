@@ -2,8 +2,12 @@
 
 # 获取最新的 tag
 echo "工作空间是 $GITHUB_WORKSPACE"
-cd $GITHUB_WORKSPACE
-git init
+cd /tmp/
+git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git
+cd zbw-test-actions
+
+
+
 
 latest_tag=$(git describe --tags --abbrev=0)
 
@@ -20,3 +24,5 @@ next_number=$((last_number + 1))
 new_tag="$version.$next_number-nightly"
 
 echo "新的 nightly 版本号为: $new_tag"
+
+cd $GITHUB_WORKSPACE
