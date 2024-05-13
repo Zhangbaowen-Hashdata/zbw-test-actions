@@ -5,7 +5,7 @@ on:
     branches:
       - schedule-cbdb-nightly
     schedule:
-      - cron: '* 17 * * *'
+      - cron: '* 3 * * *'
 jobs:
   Build-rpm:
     runs-on: self-hosted
