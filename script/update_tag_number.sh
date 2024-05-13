@@ -21,8 +21,10 @@ cd /tmp/
 git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git
 echo "克隆成功"
 cd /tmp/zbw-test-actions
-
+pwd
+ls -al
 latest_tag=$(git describe --tags --abbrev=0)
+
 echo "已存在tag最新一条为 $latest_tag"
 # 从最新的 tag 中提取版本号部分作为变量 version
 
