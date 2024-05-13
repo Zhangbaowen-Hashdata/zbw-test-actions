@@ -15,7 +15,7 @@ latest_tag=$(git describe --tags --abbrev=0)
 version=$(echo $latest_tag | grep -Eo 'v[0-9]+\.[0-9]+\.[0-9]+')
 
 # 从 tag 中提取最后一个数字作为 nightly 版本号的基数
-last_number=$(echo $latest_tag | grep -Eo '[0-9]+-nightly' | cut -d'-' -f1)
+echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1
 
 # 计算下一个 nightly 版本号的最后一位数字
 next_number=$((last_number + 1))
