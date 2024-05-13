@@ -16,7 +16,7 @@ env:
     # version 指的是主版本号 eg: v1.5.2
     # new_tag 指的是新生成的整个tag eg:  v1.5.2.62-nightly
 
-
+jobs:
   Build-rpm:
     runs-on: self-hosted
     steps:
