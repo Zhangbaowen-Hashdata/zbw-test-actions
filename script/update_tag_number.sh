@@ -10,9 +10,11 @@ if [ -d "$target_dir" ]; then
     # 如果目录存在，则删除目录
     rm -rf "$target_dir"
     echo "已删除目录 $target_dir"
+    mkdir /tmp/zbw-test-actions
 fi
 
 # 克隆仓库到目标目录
+
 git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git "$target_dir"
 echo "已克隆仓库到 $target_dir"
 cd /tmp/zbw-test-actions
