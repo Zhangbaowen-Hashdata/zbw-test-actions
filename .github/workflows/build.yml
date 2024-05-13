@@ -3,7 +3,7 @@ name: Build and Release RPM
 on:
   push:
     branches:
-      - schedule-cbdb-nightly
+      - create-tag-name-0513
     schedule:
       - cron: '* 5 * * *'
 
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: schedule-cbdb-nightly
+          ref: create-tag-name-0513
       - name: run scripts
         run: |
           # mkdir /tmp/release
