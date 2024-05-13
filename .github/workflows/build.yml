@@ -31,24 +31,27 @@ jobs:
           pwd
           ls -al
           source script/update_tag_number.sh
-          source script/build_cbdb_env.sh
-          echo "CBDB主版本号是 $main_version"
-          echo "新tag是 $new_tag"
-          git clone git@github.com:cloudberrydb/cloudberrydb.git
-          cd cloudberrydb
-          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
-          make -j16
-          make install
-          pwd
-          ruby -v
-          fpm --version
-          echo "制作rpm包"
-          mkdir -p tmp/usr/local/cloudberrydb
-          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
-          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
-          pwd
-          ls -al
-          cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
+          wget https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
+          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
+
+#          source script/build_cbdb_env.sh
+#          echo "CBDB主版本号是 $main_version"
+#          echo "新tag是 $new_tag"
+#          git clone git@github.com:cloudberrydb/cloudberrydb.git
+#          cd cloudberrydb
+#          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+#          make -j16
+#          make install
+#          pwd
+#          ruby -v
+#          fpm --version
+#          echo "制作rpm包"
+#          mkdir -p tmp/usr/local/cloudberrydb
+#          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+#          fpm -s dir -t rpm -n cloudberrydb -v 1.5.2 -p ./ -C tmp
+#          pwd
+#          ls -al
+#          cp cloudberrydb-1.5.2-1.x86_64.rpm /tmp/release
 
 
 
@@ -72,12 +75,23 @@ jobs:
           prerelease: true
 
 
-      - name: release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: "/tmp/release/cloudberrydb-1.5.2-1.x86_64.rpm"
-          tag_name: v1.5.2.${{ github.run_number }}-nightly
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm
+          asset_name: cloudberrydb-1.0.2-1.x86_64.rpm
+          asset_content_type: application/x-rpm
+
+#      - name: release
+#        uses: softprops/action-gh-release@v1
+#        with:
+#          files: "/tmp/release/cloudberrydb-1.5.2-1.x86_64.rpm"
+#          tag_name: v1.5.2.${{ github.run_number }}-nightly
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
