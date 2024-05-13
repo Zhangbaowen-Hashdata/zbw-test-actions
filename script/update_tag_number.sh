@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # 获取最新的 tag
-pwd
-ls -al
-cd /home/gpadmin/actions-runner/zbw-2/zbw-test-actions/zbw-test-actions
+echo "工作空间是 $GITHUB_WORKSPACE"
+cd $GITHUB_WORKSPACE
 latest_tag=$(git describe --tags --abbrev=0)
 
 # 从最新的 tag 中提取版本号部分作为变量 version
