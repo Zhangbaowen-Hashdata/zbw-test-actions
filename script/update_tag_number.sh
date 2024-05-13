@@ -2,9 +2,21 @@
 
 # 获取最新的 tag
 echo "工作空间是 $GITHUB_WORKSPACE"
-cd /tmp/
-git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git --force
-cd zbw-test-actions
+
+target_dir="/tmp/zbw-test-actions"
+
+# 检查目标目录是否存在
+if [ -d "$target_dir" ]; then
+    # 如果目录存在，则删除目录
+    rm -rf "$target_dir"
+    echo "已删除目录 $target_dir"
+fi
+
+# 克隆仓库到目标目录
+git clone git@github.com:Zhangbaowen-Hashdata/zbw-test-actions.git "$target_dir"
+echo "已克隆仓库到 $target_dir"
+
+cd $target_dir
 
 
 
