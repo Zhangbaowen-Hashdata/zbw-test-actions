@@ -43,16 +43,16 @@ jobs:
       - name: Debug
         run: |
           echo "new_tag 的值为: $new_tag"
-          echo "NEW_TAG 的值为: ${{ steps.set_value.outputs.MY_VALUE }}"
+          echo "NEW_TAG 的值为: ${{ steps.set_value.outputs.NEW_TAG }}"
       - name: Output tag_name
         run: |
-          echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
+          echo "当前 tag_name 值为: ${{ steps.set_value.outputs.NEW_TAG }}"
 
       - name: release
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
-          tag_name: ${{ steps.set_value.outputs.MY_VALUE }}"
+          tag_name: "${{ steps.set_value.outputs.NEW_TAG }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
