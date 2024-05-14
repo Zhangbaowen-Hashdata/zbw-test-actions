@@ -35,13 +35,11 @@ jobs:
           source script/update_tag_number.sh
           echo "CBDB主版本号是 $main_version"
           echo "新tag是 $new_tag"
-          wget https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
+          wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
           cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
-          export NEW_TAG="$new_tag"
-          echo "11111111你是 $NEW_TAG "
-          echo "让我看看你是： ${{ env.NEW_TAG }}"
 
-          echo "::set-output name=NEW_TAG::$new_tag"
+          echo "::set-output name=NEW_TAG::${new_tag}"
+
       - name: Debug
         run: |
           echo "new_tag 的值为: $new_tag"
