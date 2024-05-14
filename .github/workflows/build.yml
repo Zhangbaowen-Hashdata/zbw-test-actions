@@ -27,11 +27,30 @@ jobs:
           source script/update_tag_number.sh
           echo "CBDB主版本号是 $main_version"
           echo "新tag是 $new_tag"
-          wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
-          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
-
+          source script/build_cbdb_env.sh
+#         wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
           echo "::set-output name=NEW_TAG::${new_tag}"
           echo "::set-output name=MAIN_VERSION::${main_version}"
+
+          git clone git@github.com:cloudberrydb/cloudberrydb.git
+          cd cloudberrydb
+          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+          make -j16
+          make install
+          pwd
+          ruby -v
+          fpm --version
+          echo "制作rpm包"
+          mkdir -p tmp/usr/local/cloudberrydb
+          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+          fpm -s dir -t rpm -n cloudberrydb -v $(echo $main_version | sed 's/^v//') -p ./ -C tmp
+          pwd
+          ls -al
+          cp cloudberrydb-$(echo $main_version | sed 's/^v//')-1.x86_64.rpm /tmp/release
+
+
+
+
       - name: DEBUG
         run: |
           echo "${{ steps.set_value.outputs.NEW_TAG }}"
@@ -39,7 +58,7 @@ jobs:
       - name: release
         uses: softprops/action-gh-release@v1
         with:
-          files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
+          files: "/tmp/release/cloudberrydb-${{ steps.set_value.outputs.MAIN_VERSION#v }}-1.x86_64.rpm"
           tag_name: "${{ steps.set_value.outputs.NEW_TAG }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
