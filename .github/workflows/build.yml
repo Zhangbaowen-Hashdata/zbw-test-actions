@@ -25,6 +25,7 @@ jobs:
         with:
           ref: create-tag-name-0513
       - name: run scripts
+        id: set_value
         run: |
           # mkdir /tmp/release
           git config --global user.name "zhangbaowen"
@@ -39,10 +40,12 @@ jobs:
           export NEW_TAG="$new_tag"
           echo "11111111你是 $NEW_TAG "
           echo "让我看看你是： ${{ env.NEW_TAG }}"
+
+          echo "::set-output name=NEW_TAG::$new_tag"
       - name: Debug
         run: |
           echo "new_tag 的值为: $new_tag"
-          echo "NEW_TAG 的值为: ${{ env.NEW_TAG }}"
+          echo "NEW_TAG 的值为: ${{ steps.set_value.outputs.MY_VALUE }}"
       - name: Output tag_name
         run: |
           echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
@@ -51,7 +54,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
-          tag_name: ${{ env.NEW_TAG }}
+          tag_name: ${{ steps.set_value.outputs.MY_VALUE }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
