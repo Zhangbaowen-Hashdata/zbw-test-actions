@@ -4,6 +4,7 @@
 echo "工作空间是 $GITHUB_WORKSPACE"
 
 
+
 target_dir="/tmp/zbw-test-actions"
 timestamp=$(date +"%Y%m%d")
 
