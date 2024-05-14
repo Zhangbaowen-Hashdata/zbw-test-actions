@@ -31,6 +31,8 @@ jobs:
           pwd
           ls -al
           source script/update_tag_number.sh
+          echo "CBDB主版本号是 $main_version"
+          echo "新tag是 $new_tag"
           wget https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
           cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
 
