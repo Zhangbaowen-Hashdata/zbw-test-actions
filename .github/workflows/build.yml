@@ -35,13 +35,14 @@ jobs:
           echo "新tag是 $new_tag"
           wget https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
           cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
-
-          echo "让我看看你是： ${{ env.new_tag }}"
+          export NEW_TAG="$new_tag"
+          echo "11111111你是 $NEW_TAG "
+          echo "让我看看你是： ${{ env.NEW_TAG }}"
       - name: release
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
-          tag_name: ${{ env.new_tag }}
+          tag_name: ${{ env.NEW_TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

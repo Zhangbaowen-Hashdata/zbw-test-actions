@@ -42,5 +42,5 @@ next_number=$((last_number + 1))
 new_tag="$main_version.$next_number-nightly"
 
 echo "新的 nightly 版本号为: $new_tag"
-export new_tag="$new_tag"
+
 cd $GITHUB_WORKSPACE
