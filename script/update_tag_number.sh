@@ -34,10 +34,10 @@ main_version=$(echo $latest_tag | grep -Eo 'v[0-9]+\.[0-9]+\.[0-9]+')
 echo "最新的cbdb主版本是$main_version"
 # 从 tag 中提取最后一个数字作为 nightly 版本号的基数
 
-last_number=$(echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1)
+# last_number=$(echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1)
 
 # 计算下一个 nightly 版本号的最后一位数字
-next_number=$((last_number + 1))
+# next_number=$((last_number + 1))
 
 # 设置新的 nightly 版本号
 new_tag="$main_version.$timestamp-nightly"
