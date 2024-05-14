@@ -5,6 +5,7 @@ echo "工作空间是 $GITHUB_WORKSPACE"
 
 
 target_dir="/tmp/zbw-test-actions"
+timestamp=$(date +"%Y%m%d")
 
 # 检查目标目录是否存在
 if [ -d "$target_dir" ]; then
@@ -39,7 +40,7 @@ last_number=$(echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1)
 next_number=$((last_number + 1))
 
 # 设置新的 nightly 版本号
-new_tag="$main_version.$next_number-nightly"
+new_tag="$main_version.$next_number.$timestamp-nightly"
 
 echo "新的 nightly 版本号为: $new_tag"
 

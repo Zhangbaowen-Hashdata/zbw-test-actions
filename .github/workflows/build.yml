@@ -40,13 +40,6 @@ jobs:
 
           echo "::set-output name=NEW_TAG::${new_tag}"
 
-      - name: Debug
-        run: |
-          echo "new_tag 的值为: $new_tag"
-          echo "NEW_TAG 的值为: ${{ steps.set_value.outputs.NEW_TAG }}"
-      - name: Output tag_name
-        run: |
-          echo "当前 tag_name 值为: ${{ steps.set_value.outputs.NEW_TAG }}"
 
       - name: release
         uses: softprops/action-gh-release@v1
