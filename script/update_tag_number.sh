@@ -40,7 +40,7 @@ last_number=$(echo $latest_tag | awk -F'[.]' '{print $4}' | cut -d'-' -f1)
 next_number=$((last_number + 1))
 
 # 设置新的 nightly 版本号
-new_tag="$main_version.$next_number.$timestamp-nightly"
+new_tag="$main_version.$timestamp-nightly"
 
 echo "新的 nightly 版本号为: $new_tag"
 
