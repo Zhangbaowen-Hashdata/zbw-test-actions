@@ -41,7 +41,8 @@ jobs:
           echo "让我看看你是： ${{ env.NEW_TAG }}"
 
       - name: Output tag_name
-        run: echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
+        run: |
+          echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
 
       - name: release
         uses: softprops/action-gh-release@v1
