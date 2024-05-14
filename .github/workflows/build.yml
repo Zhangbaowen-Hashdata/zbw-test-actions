@@ -39,7 +39,10 @@ jobs:
           export NEW_TAG="$new_tag"
           echo "11111111你是 $NEW_TAG "
           echo "让我看看你是： ${{ env.NEW_TAG }}"
-
+      - name: Debug
+        run: |
+          echo "new_tag 的值为: $new_tag"
+          echo "NEW_TAG 的值为: ${{ env.NEW_TAG }}"
       - name: Output tag_name
         run: |
           echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
