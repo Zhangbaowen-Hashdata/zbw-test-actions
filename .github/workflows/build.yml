@@ -39,9 +39,11 @@ jobs:
           export NEW_TAG="$new_tag"
           echo "11111111你是 $NEW_TAG "
           echo "让我看看你是： ${{ env.NEW_TAG }}"
+
+      - name: Output tag_name
+        run: echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
+
       - name: release
-        run: |
-          echo "当前 tag_name 值为: ${{ env.NEW_TAG }}"
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
