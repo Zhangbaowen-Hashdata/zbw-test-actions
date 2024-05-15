@@ -4,7 +4,7 @@
 echo "工作空间是 $GITHUB_WORKSPACE"
 
 
-
+rm -rf /tmp/release/*
 target_dir="/tmp/zbw-test-actions"
 timestamp=$(date +"%Y%m%d")
 
