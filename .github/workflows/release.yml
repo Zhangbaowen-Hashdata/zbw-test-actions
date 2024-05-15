@@ -1,11 +1,11 @@
 name: Build and Release RPM
 
 on:
-  push:
-    branches:
-      - create-tag-name-0513
-    schedule:
-      - cron: '* 5 * * *'
+#  push:
+#    branches:
+#      - create-tag-name-0513
+  schedule:
+    - cron: '26 14 * * *'
 
 
 
