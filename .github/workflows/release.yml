@@ -1,0 +1,44 @@
+name: Build and Release RPM
+
+on:
+  push:
+    branches:
+      - create-tag-name-0513
+    schedule:
+      - cron: '* 5 * * *'
+
+
+
+jobs:
+  Build-rpm:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: create-tag-name-0513
+      - name: run scripts
+        id: set_value
+        run: |
+          # mkdir /tmp/release
+          git config --global user.name "zhangbaowen"
+          git config --global user.email "zhangbaowen@hashdata.cn"
+          pwd
+          ls -al
+          source script/update_tag_number.sh
+          echo "CBDB主版本号是 $main_version"
+          echo "新tag是 $new_tag"
+          wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
+          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
+          echo "::set-output name=NEW_TAG::${new_tag}"
+          echo "::set-output name=MAIN_VERSION::${main_version}"
+      - name: DEBUG
+        run: |
+          echo "${{ steps.set_value.outputs.NEW_TAG }}"
+          echo "${{ steps.set_value.outputs.MAIN_VERSION }}"
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "/tmp/release/cloudberrydb-1.0.2-1.x86_64.rpm"
+          tag_name: "${{ steps.set_value.outputs.NEW_TAG }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
