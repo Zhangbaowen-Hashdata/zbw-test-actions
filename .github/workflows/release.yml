@@ -5,7 +5,7 @@ on:
 #    branches:
 #      - create-tag-name-0513
   schedule:
-    - cron: '26 14 * * *'
+    - cron: '30 6 * * *'
 
 
 
