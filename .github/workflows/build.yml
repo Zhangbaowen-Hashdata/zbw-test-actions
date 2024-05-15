@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - create-tag-name-0513
-
+    schedule:
+      - cron: '* 5 * * *'
 
 
 
@@ -13,37 +14,38 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: create-tag-name-0513
       - name: run scripts
         id: set_value
         run: |
-          # mkdir /tmp/release
-          git config --global user.name "zhangbaowen"
-          git config --global user.email "zhangbaowen@hashdata.cn"
-          pwd
-          ls -al
-          source script/update_tag_number.sh
-          echo "CBDB主版本号是 $main_version"
-          echo "新tag是 $new_tag"
-          source script/build_cbdb_env.sh
-#         wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
-          echo "::set-output name=NEW_TAG::${new_tag}"
-          echo "::set-output name=MAIN_VERSION::${main_version}"
-
-
-          git clone git@github.com:cloudberrydb/cloudberrydb.git
-          cd cloudberrydb
-          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
-          make -j16
-          make install
-          pwd
-          ruby -v
-          fpm --version
-          echo "制作rpm包"
-          mkdir -p tmp/usr/local/cloudberrydb
-          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
-          fpm -s dir -t rpm -n cloudberrydb -v $(echo $main_version | sed 's/^v//') -p ./ -C tmp
-          pwd
-          ls -al
+#          # mkdir /tmp/release
+#          git config --global user.name "zhangbaowen"
+#          git config --global user.email "zhangbaowen@hashdata.cn"
+#          pwd
+#          ls -al
+#          source script/update_tag_number.sh
+#          echo "CBDB主版本号是 $main_version"
+#          echo "新tag是 $new_tag"
+#          source script/build_cbdb_env.sh
+##         wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
+#          echo "::set-output name=NEW_TAG::${new_tag}"
+#          echo "::set-output name=MAIN_VERSION::${main_version}"
+#
+#          git clone git@github.com:cloudberrydb/cloudberrydb.git
+#          cd cloudberrydb
+#          ./configure --with-perl --with-python --with-libxml --with-gssapi --prefix=/home/gpadmin/cbdb-install
+#          make -j16
+#          make install
+#          pwd
+#          ruby -v
+#          fpm --version
+#          echo "制作rpm包"
+#          mkdir -p tmp/usr/local/cloudberrydb
+#          sudo cp -a /home/gpadmin/cbdb-install/* tmp/usr/local/cloudberrydb
+#          fpm -s dir -t rpm -n cloudberrydb -v $(echo $main_version | sed 's/^v//') -p ./ -C tmp
+#          pwd
+#          ls -al
           cp cloudberrydb-$(echo $main_version | sed 's/^v//')-1.x86_64.rpm /tmp/release
 
 
