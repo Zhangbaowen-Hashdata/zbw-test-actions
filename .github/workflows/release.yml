@@ -27,8 +27,6 @@ jobs:
           source script/update_tag_number.sh
           echo "CBDB主版本号是 $main_version"
           echo "新tag是 $new_tag"
-          wget -q https://public-artifacts.obs.cn-north-4.myhuaweicloud.com/cbdb-rpm/cloudberrydb-1.0.2-1.x86_64.rpm
-          cp cloudberrydb-1.0.2-1.x86_64.rpm /tmp/release/
           echo "::set-output name=NEW_TAG::${new_tag}"
           echo "::set-output name=MAIN_VERSION::${main_version}"
 
@@ -47,7 +45,7 @@ jobs:
           pwd
           ls -al
           cp cloudberrydb-$(echo $main_version | sed 's/^v//')-1.x86_64.rpm /tmp/release
-
+          ls -al /tmp/release
       - name: DEBUG
         run: |
           echo "${{ steps.set_value.outputs.NEW_TAG }}"
