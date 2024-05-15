@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - create-tag-name-0513
-    schedule:
-      - cron: '* 5 * * *'
+
 
 
 
