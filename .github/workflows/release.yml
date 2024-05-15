@@ -52,22 +52,12 @@ jobs:
           echo "${{ steps.set_value.outputs.NEW_TAG }}"
           echo "${{ steps.set_value.outputs.MAIN_VERSION }}"
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          tag_name: ${{ steps.set_value.outputs.NEW_TAG }}
-          release_name: Release ${{ steps.set_value.outputs.NEW_TAG }}
-          body: New release of cbdb RPM package
-          draft: false
-          prerelease: true
-
       - name: release
         uses: softprops/action-gh-release@v1
         with:
           files: "/tmp/release/*.rpm"
+          name: release "${{ steps.set_value.outputs.NEW_TAG }}"
           tag_name: "${{ steps.set_value.outputs.NEW_TAG }}"
+          prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
