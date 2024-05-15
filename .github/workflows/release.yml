@@ -55,7 +55,7 @@ jobs:
       - name: release
         uses: softprops/action-gh-release@v1
         with:
-          files: "/tmp/release/cloudberrydb-${{ steps.set_value.outputs.MAIN_VERSION#v }}-1.x86_64.rpm"
+          files: "/tmp/release/cloudberrydb-${{ $steps.set_value.outputs.MAIN_VERSION#v }}-1.x86_64.rpm"
           tag_name: "${{ steps.set_value.outputs.NEW_TAG }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
